@@ -25,27 +25,39 @@ $webclient.DownloadFile($url, $filename);
 
 #### copy file
 $winetc = "\System32\drivers\etc\"
-$filename = "hosts"
+$original_filename = "hosts"
 $file_bak = "hosts.bak"
 
-$path_dl_file = $env:windir + $winetc + "hosts.new";  ###$PSScriptRoot + $filename;
-$path_old_file = $env:windir + $winetc + $filename;
+ ###$PSScriptRoot + $filename;
+$path_old_file = $env:windir + $winetc + $original_filename;
 $path_bak_file = $env:windir + $winetc + $file_bak ;
-$path_new_file = $env:windir + $winetc + "hosts.new";
+$path_new_file = $filename;
 
-$host_file = Get-Item $path_dl_file
-if ( $host_file.Exists -eq $true ){
-    $old_hosts = Get-Item $path_old_file
-    $new_hosts = Get-Item $path_new_file
-    #$bak_hosts = Get-Item $path_bak_file
-    if ($bak_hosts.Exists  -eq $true ){
-        $bak_hosts.Delete($true);
+
+$old_hosts = Get-Item $path_old_file
+$new_hosts = Get-Item $path_new_file
+$bak_hosts = Get-Item $path_bak_file
+
+if ( $old_hosts.Exists -eq $true ){
+
+    if ($bak_hosts.Exists -eq $true ){
+        $old_hosts.CopyTo($bak_hosts.FullName , $true)
+    }else{
+        $old_hosts.CopyTo($path_bak_file, $true);
     }
-    $old_hosts.CopyTo($path_bak_file, $true);
-    #$new_hosts.Replace($old_hosts.FullName , $true)
+    $new_hosts.CopyTo($path_old_file , $true)
+    #$old_hosts.CopyTo($path_bak_file, $true);
+    #$new_hosts.CopyTo($old_hosts.FullName , $true)
+    # $bak_hosts.Delete($true);
+
+}else{
+    $new_hosts.CopyTo($path_old_file , $true)
 } 
 Write-Host "done!"
-$host_file.Delete();
+if ($new_hosts.Exists -eq  $true){
+    $new_hosts.Delete();
+
+}
 
 Write-Host "如果想要恢复上一个版本的hosts，请复制hosts.bak内的文本内容，粘贴至hosts文件"
 
