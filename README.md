@@ -6,4 +6,4 @@
 ### 特别感谢 Special thanks
 hosts数据源链接：https://github.com/googlehosts/hosts
 <br/>
-and 搬砖的我!!! (MD又™失业了！！！）
+and 搬砖的我!!!  ~~~(MD又™失业了！！！）~~~
