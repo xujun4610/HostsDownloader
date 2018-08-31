@@ -9,10 +9,37 @@
 ##调试时候，请开启如下语句！
 ##Set-PSDebug -step
 
+# 提升权限
+If (-NOT ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator"))
+{   
+    $arguments = "& '" + $myinvocation.mycommand.definition + "'"
+    Start-Process powershell -Verb runAs -ArgumentList $arguments
+    Break
+}
+
+Write-Host("
+++++++++++++++++++++++++++++++++++++++++++++++++++
+
+  下载最新版本hosts（HostsDownloader）
+  Version 1.2
+
+  Niko Xu Production © " + (Get-Date).Year + "
+
+  ↓ If you like this,please visit my GitHub 
+  https://github.com/xujun4610
+
+++++++++++++++++++++++++++++++++++++++++++++++++++
+");
+
 ## 设置PS为脚本运行！
-Write-Host "您的系统不支持Powershell远程脚本运行！正在修改系统权限！"
-Write-Host "（*^_^*）放心,这个操作真的真的不会危害您的PC安全！！！"
-Set-ExecutionPolicy RemoteSigned CurrentUser
+
+if ( (Get-ExecutionPolicy).ToString().Equals("RemoteSigned") -eq $false )
+{
+    Write-Host "【WARN】您的系统不支持Powershell远程脚本运行！正在修改系统权限！"
+    Write-Host "（*^_^*）放心,这个操作真的真的不会危害您的PC安全！！！"
+    Set-ExecutionPolicy RemoteSigned CurrentUser
+}
+
 
 #### get web content
 $webclient = New-Object System.Net.WebClient
@@ -59,6 +86,10 @@ if ($new_hosts.Exists -eq  $true){
 
 }
 
-Write-Host "如果想要恢复上一个版本的hosts，请复制hosts.bak内的文本内容，粘贴至hosts文件"
+Write-Host "【INFO】如果想要恢复上一个版本的hosts，请复制hosts.bak内的文本内容，粘贴至hosts文件"
 
 ipconfig /flushdns
+
+"【INFO】输入任意键可退出Powershell控制台。" ;
+[Console]::Readkey() |　Out-Null ;
+Exit ;
