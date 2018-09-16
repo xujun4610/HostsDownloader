@@ -27,6 +27,11 @@ Write-Host("
 
   ↓ If you like this,please visit my GitHub 
   https://github.com/xujun4610
+  
+  在使用了hosts之后，请您遵守当地有关的法律法规
+  做一个守法爱法的好公民
+  Please compliance with local laws 
+  and be a good citizen.
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++
 ");
