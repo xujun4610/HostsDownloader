@@ -21,17 +21,12 @@ Write-Host("
 ++++++++++++++++++++++++++++++++++++++++++++++++++
 
   下载最新版本hosts（HostsDownloader）
-  Version 1.2
+  Version 1.3
 
   Niko Xu Production © " + (Get-Date).Year + "
 
   ↓ If you like this,please visit my GitHub 
   https://github.com/xujun4610
-  
-  在使用了hosts之后，请您遵守当地有关的法律法规
-  做一个守法爱法的好公民
-  Please compliance with local laws 
-  and be a good citizen.
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++
 ");
@@ -52,7 +47,8 @@ $webclient = New-Object System.Net.WebClient
 $webclient.Encoding =  [System.Text.Encoding]::UTF8
 $url = "https://raw.githubusercontent.com/googlehosts/hosts/master/hosts-files/hosts";
 $filename =  $env:windir + "\System32\drivers\etc\" + "hosts.new";
-Write-Host "Downloading, please wait!"
+Write-Host ("正在下载中，请稍候...
+Downloading, please wait...")
 $webclient.DownloadFile($url, $filename);
 
 #### copy file
@@ -68,11 +64,14 @@ $path_new_file = $filename;
 
 $old_hosts = Get-Item $path_old_file
 $new_hosts = Get-Item $path_new_file
-$bak_hosts = Get-Item $path_bak_file
+$bak_hosts_flag = [System.IO.File]::Exists($path_bak_file);
 
+if ( $bak_hosts_flag -eq $true  ){
+    $bak_hosts = Get-Item $path_bak_file
+}
 if ( $old_hosts.Exists -eq $true ){
 
-    if ($bak_hosts.Exists -eq $true ){
+    if ($bak_hosts_flag -eq $true ){
         $old_hosts.CopyTo($bak_hosts.FullName , $true)
     }else{
         $old_hosts.CopyTo($path_bak_file, $true);
