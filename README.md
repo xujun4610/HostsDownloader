@@ -19,6 +19,9 @@
 #### V1.2
     1. 可以直接以管理员模式运行！  Run as administrator automatically. 
     2. 优化使用体验！  Improve scripting experience.
+    
+#### V1.3
+    1. 修复未能找到备份文件的Bug。 Fixed bug about the bakup file not found.
 
 ### 特别感谢 Special thanks
 hosts数据源链接：https://github.com/googlehosts/hosts
