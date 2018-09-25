@@ -1,5 +1,8 @@
 # HostsDownloader
-在线获取最新版本hosts文件-Powershell脚本程序！
+在线获取最新版本hosts文件-Powershell脚本程序！<br/>
+[ 2018-09-24更新 ]<br/> 
+<strong>成就获得：我们的已经达成了“墙”国梦。</strong><br/>
+FXXK 我们天朝的GFW，这次连日亚都给墙了！👍睿智。
 
 ### 支援信息 Support
     NOTE：此脚本仅支持安装了 Powershell 3.0版本以上的Windows操作系统。
