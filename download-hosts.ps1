@@ -21,13 +21,16 @@ Write-Host("
 ++++++++++++++++++++++++++++++++++++++++++++++++++
 
   下载最新版本hosts（HostsDownloader）
-  Version 1.3
+  Version 1.3.1
 
   Niko Xu Production © " + (Get-Date).Year + "
 
   ↓ If you like this,please visit my GitHub 
   https://github.com/xujun4610
-
+  - OR -
+  ★ Star my repository
+  https://github.com/xujun4610/HostsDownloader
+  
 ++++++++++++++++++++++++++++++++++++++++++++++++++
 ");
 
